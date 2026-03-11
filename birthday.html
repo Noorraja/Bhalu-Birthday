@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday Umar</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  color:#4b2c20;
+  background:linear-gradient(135deg,#6b4226,#d2a679,#ffd6e7,#fff2a8);
+  transition: opacity 1s;
+}
+
+.container{
+  padding:60px 20px;
+}
+
+h1{
+  font-size:45px;
+  color:#5a2d0c;
+}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff7aa2;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#ff4b6e;
+}
+
+.card{
+  display:none;
+  background:white;
+  margin:30px auto;
+  width:85%;
+  max-width:600px;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+#letter{
+  font-size:18px;
+  white-space:pre-line;
+  margin-top:15px;
+}
+
+#countdown{
+  font-size:24px;
+  margin:20px;
+}
+
+.heart{
+  position:fixed;
+  bottom:-10px;
+  color:red;
+  font-size:20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-110vh);}
+}
+
+.gallery{
+  margin-top:40px;
+}
+
+.gallery img{
+  width:180px;
+  border-radius:15px;
+  margin:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.secret{
+  margin-top:40px;
+}
+
+input{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  text-align:center;
+}
+
+/* Secret Overlay Styles */
+#secretOverlay{
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:#fff2a8;
+  color:#4b2c20;
+  font-family:Arial, sans-serif;
+  text-align:left;
+  padding:50px 40px;
+  z-index:9999;
+  overflow:auto;
+}
+
+#secretMessageLetter{
+  font-size:20px;
+  max-width:700px;
+  margin:0 auto;
+  line-height:1.8;
+  white-space:pre-line;
+}
+
+#secretMessageLetter h2{
+  font-weight:bold;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+#secretMessageLetter p{
+  margin:15px 0;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🐻 Happy Birthday Mera Bhalu 🎂</h1>
+<p>To the most special person in my life</p>
+
+<div id="countdown"></div>
+
+<button onclick="openCard()">Open Your Birthday Letter 💌</button>
+
+<div class="card" id="card">
+  <h2>My Letter To You</h2>
+  <div id="letter"></div>
+</div>
+
+<div class="gallery">
+  <h2>Special Guests 🐱🦆</h2>
+  <p>Bell says Happy Birthday!</p>
+  <img src="bell.jpg.jpeg" alt="Bell the cat">
+
+  <p>Chinku & Minku sending birthday quacks 🦆</p>
+  <img src="Chinku.jpg.jpeg" alt="Our Babies">
+ 
+</div>
+
+<div class="secret">
+  <h3>🔒 Secret Space</h3>
+  <p>Only one code can unlock this message</p>
+
+  <input type="password" id="codeInput" placeholder="Enter Code">
+  <br><br>
+  <button onclick="unlockMessage()">Unlock</button>
+</div>
+
+</div>
+
+<!-- Secret Overlay -->
+<div id="secretOverlay">
+  <div id="secretMessageLetter"></div>
+</div>
+
+<script>
+// Countdown
+var targetDate = new Date("April 10, 2026 00:00:00").getTime();
+var countdownInterval = setInterval(function(){
+  var now = new Date().getTime();
+  var distance = targetDate - now;
+  var days = Math.floor(distance / (1000*60*60*24));
+  var hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  var minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  var seconds = Math.floor((distance%(1000*60))/1000);
+
+  if(distance < 0){
+    clearInterval(countdownInterval);
+    document.getElementById("countdown").innerHTML = "🎉 Happy Birthday Umar! 🎉";
+  } else {
+    document.getElementById("countdown").innerHTML =
+    "⏳ Countdown: "+days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+  }
+},1000);
+
+// Birthday Letter Typing
+var text = `Umar,
+
+
+
+From the moment you came into my life,
+things started feeling warmer and brighter.
+
+Your care, your madness,
+and the way you adore me —
+it means more than words can explain.
+
+Sometimes I quietly thank Allah
+for sending someone like you into my life.
+
+You make my ordinary days special
+and my nights peaceful.
+
+Happy Birthday Mera Bhalu 🐻
+
+May Allah protect you,
+bless your life with success,
+and give you every happiness.
+And selfishly…
+I hope I always remain
+a beautiful part of your life.
+
+Forever yours,
+Noori ❤️`;
+
+var i=0;
+function openCard(){
+  document.getElementById("card").style.display="block";
+  document.getElementById("letter").innerHTML = "";
+  i = 0;
+  typeLetter();
+}
+
+function typeLetter(){
+  if(i<text.length){
+    document.getElementById("letter").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeLetter,40);
+  }
+}
+
+// Unlock Secret Letter (Possession + Contact)
+function unlockMessage(){
+  var code = document.getElementById("codeInput").value;
+
+  if(code == "08"){
+    var overlay = document.getElementById("secretOverlay");
+    overlay.style.display = "block";
+
+    var display = document.getElementById("secretMessageLetter");
+    display.innerHTML = "";
+
+    var letterElements = [
+      '<h2>🌙 Possession Letter 🌙</h2>',
+      '<p>Lt. Umar,</p>',
+      '<p>Congratulations.</p>',
+      '<p>By successfully entering the code "08", you have officially unlocked the most important document of your life.</p>',
+      '<p>This is your Possession Letter.</p>',
+      '<p>It states that from this moment onward, you are lovingly and permanently possessed by Noor.</p>',
+      '<p><strong>Terms & Conditions:</strong></p>',
+      '<p>• You must continue caring for me the way you always do.<br>• You must tolerate my random moods.<br>• You must keep making me smile.<br>• You are not allowed to run away.</p>',
+      '<p><strong>Important Notice:</strong></p>',
+      '<p>Attempts to escape this possession will be rejected, because unfortunately for you…</p>',
+      '<p>I like you way too much to let you go.</p>',
+      '<p><strong>Benefits include:</strong></p>',
+      '<p>Unlimited love<br>Lifetime chaos aur dheer sare Pata nhi Pata nhi and KYA? KYA? moments haha<br>And one girl always secretly praying for you.</p>',
+      '<p>Happy Birthday Mera Bhalu 🐻</p>',
+      '<p>Signed,<br>Your permanent problem,<br>Noor ❤️</p>',
+      '<hr>',
+      '<h2>🌙 ARZ KEYA HAI.... 🌙</h2>',
+      '<p>Say IRSHAAD IRSHAAD,</p>',
+      '<p>میری ہر صبح کا سورج تم ہی سے روشن ہے<br>میری ہر شام کی تنہائی میں بھی تم ہی ہو<br>مانگا ہے رب سے تجھے ہر دعا کے سجدے میں<br>میری قسمت کی لکیروں میں بھی تم ہی ہو</p>',
+      '<p>Forever yours,<br>Apki Mintu ❤️</p>',
+      '<p>With love,<br>Umar & Noor</p>'
+    ];
+
+    var index = 0;
+    function typeNext(){
+      if(index < letterElements.length){
+        display.innerHTML += letterElements[index];
+        index++;
+        setTimeout(typeNext, 100);
+      }
+    }
+    typeNext();
+
+  } else {
+    alert("Wrong code 👀");
+  }
+}
+
+// Floating Hearts
+function createHeart(){
+  var heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100+"vw";
+  heart.style.fontSize = (10 + Math.random()*20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(()=>{heart.remove();},6000);
+}
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
